@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import MapAppPicker from "@/components/MapAppPicker";
 
 const MapView = dynamic(() => import("@/components/MapView"), {
   ssr: false,
@@ -51,7 +53,10 @@ export default function Home() {
   const [activeResult, setActiveResult] = useState<PlaceResult | null>(null);
   const [btnAnimating, setBtnAnimating] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [showMapPicker, setShowMapPicker] = useState(false);
+  const [mapPickerTarget, setMapPickerTarget] = useState<PlaceResult | null>(null);
 
+  const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-open drawer on mobile when results come in
@@ -97,6 +102,12 @@ export default function Home() {
         });
         setActiveResult(data);
         setQuery("");
+
+        // On mobile, auto-show map app picker
+        if (window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          setMapPickerTarget(data);
+          setShowMapPicker(true);
+        }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : "查询失败，请稍后重试");
       } finally {
@@ -223,10 +234,43 @@ export default function Home() {
           </div>
         )}
 
-        {/* ===== Map ===== */}
-        <main className="flex-1 relative">
-          <MapView results={results} activeResult={activeResult} />
-        </main>
+        {/* ===== Map (desktop only) / Results list (mobile) ===== */}
+        {isMobile ? (
+          <main className="flex-1 relative overflow-y-auto bg-[#fdf6e3]">
+            <div className="pt-20 pb-20 px-3">
+              {results.length === 0 ? (
+                <MobileEmptyState />
+              ) : (
+                <div className="space-y-3">
+                  {results.map((r, i) => (
+                    <MobileResultCard
+                      key={`${r.ancient_name}-${i}`}
+                      result={r}
+                      onOpenMap={() => {
+                        setMapPickerTarget(r);
+                        setShowMapPicker(true);
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </main>
+        ) : (
+          <main className="flex-1 relative">
+            <MapView results={results} activeResult={activeResult} />
+          </main>
+        )}
+
+        {/* Map app picker modal (mobile) */}
+        {showMapPicker && mapPickerTarget && (
+          <MapAppPicker
+            latitude={mapPickerTarget.latitude}
+            longitude={mapPickerTarget.longitude}
+            name={`${mapPickerTarget.ancient_name} → ${mapPickerTarget.modern_name}`}
+            onClose={() => setShowMapPicker(false)}
+          />
+        )}
       </div>
     </div>
   );
@@ -452,5 +496,83 @@ function ResultCard({ result: r, isActive, index, onClick }: ResultCardProps) {
         <span>{r.dynasty_info}</span>
       </div>
     </button>
+  );
+}
+
+/* ===== Mobile-only Components ===== */
+
+function MobileEmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] px-8 text-center">
+      <div className="animate-float mb-4 relative">
+        <div className="text-6xl">🏛️</div>
+        <div className="absolute -top-1 -right-3 text-2xl animate-spin-slow">✦</div>
+        <div className="absolute -bottom-1 -left-3 text-lg opacity-60">🗺️</div>
+      </div>
+      <h3
+        className="text-amber-800 font-semibold text-lg mb-2"
+        style={{ fontFamily: "'Noto Serif SC', serif" }}
+      >
+        探索古今地名
+      </h3>
+      <p className="text-amber-600/70 text-sm leading-relaxed">
+        搜索古代地名，查看结果后<br />可直接在手机地图 App 中查看位置
+      </p>
+      <div className="mt-4 flex gap-2 text-xs text-amber-400">
+        <span>🏯 长安</span><span>·</span>
+        <span>🌊 临安</span><span>·</span>
+        <span>🐉 金陵</span>
+      </div>
+    </div>
+  );
+}
+
+interface MobileResultCardProps {
+  result: PlaceResult;
+  onOpenMap: () => void;
+}
+
+function MobileResultCard({ result: r, onOpenMap }: MobileResultCardProps) {
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-amber-200/50 p-4 shadow-sm animate-fade-up">
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-lg">📍</span>
+        <span
+          className="font-bold text-amber-900 text-xl"
+          style={{ fontFamily: "'Noto Serif SC', serif" }}
+        >
+          {r.ancient_name}
+        </span>
+        <span className="text-amber-400">→</span>
+        <span className="text-amber-800 font-medium text-lg">{r.modern_name}</span>
+      </div>
+
+      {/* Info */}
+      <div className="text-xs text-amber-600/70 mb-2 flex items-center gap-1.5">
+        <span>📌</span>
+        <span>{r.province} · {r.latitude.toFixed(2)}°N, {r.longitude.toFixed(2)}°E</span>
+      </div>
+
+      {/* Description */}
+      <p className="text-sm text-amber-800/80 leading-relaxed mb-3">
+        {r.description}
+      </p>
+
+      {/* Dynasty info */}
+      <div className="inline-flex items-center gap-1 text-xs text-amber-800 bg-amber-100/80 px-2.5 py-1 rounded-lg border border-amber-200/40 mb-3">
+        <span>📜</span>
+        <span>{r.dynasty_info}</span>
+      </div>
+
+      {/* Open in map button */}
+      <button
+        onClick={onOpenMap}
+        className="w-full mt-2 py-3 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl font-medium text-sm shadow-md active:from-amber-800 active:to-amber-900 transition-all flex items-center justify-center gap-2"
+      >
+        <span>🗺️</span>
+        <span>在地图 App 中查看</span>
+      </button>
+    </div>
   );
 }
