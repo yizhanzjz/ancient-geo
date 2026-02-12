@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ancient-geo-api
+    runtime: docker
+    repo: https://github.com/yizhanzjz/ancient-geo
+    rootDir: backend
+    plan: free
+    envVars:
+      - key: GLM_API_KEY
+        sync: false
+      - key: GLM_BASE_URL
+        value: https://open.bigmodel.cn/api/paas/v4
+      - key: GLM_MODEL
+        value: glm-4-flash
