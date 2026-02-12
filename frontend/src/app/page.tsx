@@ -123,10 +123,10 @@ export default function Home() {
               className="text-xl sm:text-2xl font-bold tracking-wide"
               style={{ fontFamily: "'Noto Serif SC', serif" }}
             >
-              古今地名对照
+              舆图今昔
             </h1>
             <p className="text-amber-300/80 text-xs sm:text-sm mt-0.5">
-              输入中国古代地名，探索其现代地理位置
+              古今地名对照 · 探索千年地理变迁
             </p>
           </div>
         </div>
