@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "古今地名对照",
+    "navigationBarBackgroundColor": "#92400e",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#fef3c7",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

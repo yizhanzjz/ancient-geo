@@ -1,0 +1,117 @@
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <view class="header-icon">🏛️</view>
+    <view class="header-text">
+      <text class="header-title">古今地名对照</text>
+      <text class="header-subtitle">探索古代地名的现代位置</text>
+    </view>
+  </view>
+
+  <!-- 搜索区域 -->
+  <view class="search-section">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="输入古代地名，如：长安、临安…"
+        placeholder-class="placeholder"
+        value="{{query}}"
+        bindinput="onInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+      <view class="search-btn {{loading ? 'loading' : ''}}" bindtap="onSearch">
+        <text wx:if="{{!loading}}">查询</text>
+        <view wx:else class="loading-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 快捷标签 -->
+    <view class="tags">
+      <view
+        class="tag"
+        wx:for="{{examplePlaces}}"
+        wx:key="name"
+        bindtap="onTagTap"
+        data-name="{{item.name}}"
+      >
+        <text>{{item.emoji}}{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 错误提示 -->
+  <view class="error-box" wx:if="{{error}}">
+    <text>❌ {{error}}</text>
+  </view>
+
+  <!-- 结果列表 -->
+  <view class="results" wx:if="{{results.length > 0}}">
+    <view class="section-title">
+      <text class="section-icon">📜</text>
+      <text>查询记录</text>
+    </view>
+
+    <view
+      class="result-card {{activeIndex === index ? 'active' : ''}}"
+      wx:for="{{results}}"
+      wx:key="index"
+      bindtap="onResultTap"
+      data-index="{{index}}"
+    >
+      <view class="card-header">
+        <view class="card-names">
+          <text class="ancient-name">{{item.ancient_name}}</text>
+          <text class="arrow">→</text>
+          <text class="modern-name">{{item.modern_name}}</text>
+        </view>
+        <view class="card-nav" catchtap="onNavigate" data-index="{{index}}">
+          <text>📍导航</text>
+        </view>
+      </view>
+
+      <view class="card-info">
+        <text class="info-location">📌 {{item.province}} · {{item.latitude}}°N, {{item.longitude}}°E</text>
+      </view>
+
+      <view class="card-desc" wx:if="{{activeIndex === index}}">
+        <text class="desc-text">{{item.description}}</text>
+        <view class="dynasty-tag">
+          <text>📜 {{item.dynasty_info}}</text>
+        </view>
+      </view>
+
+      <view class="card-hint" wx:if="{{activeIndex !== index}}">
+        <text>点击查看详情</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{results.length === 0 && !loading}}">
+    <view class="empty-icons">
+      <text class="empty-icon-main">🏛️</text>
+      <text class="empty-icon-star">✦</text>
+      <text class="empty-icon-map">🗺️</text>
+    </view>
+    <text class="empty-title">探索古今地名</text>
+    <text class="empty-desc">搜索古代地名，发现跨越千年的地理变迁</text>
+    <view class="empty-examples">
+      <text>长安 · 临安 · 金陵 · 汴梁</text>
+    </view>
+  </view>
+
+  <!-- Loading 骨架屏 -->
+  <view class="skeleton" wx:if="{{loading && results.length === 0}}">
+    <view class="skeleton-card">
+      <view class="skeleton-line long shimmer"></view>
+      <view class="skeleton-line medium shimmer"></view>
+      <view class="skeleton-line short shimmer"></view>
+    </view>
+  </view>
+</view>

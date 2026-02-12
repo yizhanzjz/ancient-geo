@@ -1,0 +1,372 @@
+/* 容器 */
+.container {
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 32rpx 32rpx;
+  background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #78350f 100%);
+  color: #fff;
+}
+
+.header-icon {
+  font-size: 56rpx;
+  margin-right: 20rpx;
+  background: rgba(255, 255, 255, 0.15);
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+}
+
+.header-subtitle {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4rpx;
+}
+
+/* 搜索区域 */
+.search-section {
+  margin: 24rpx 24rpx 0;
+  padding: 28rpx;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 24rpx rgba(146, 64, 14, 0.08);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  padding: 0 8rpx 0 20rpx;
+  height: 80rpx;
+}
+
+.search-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.placeholder {
+  color: #9ca3af;
+  font-size: 26rpx;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #b45309, #92400e);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 0 32rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 12rpx;
+  text-align: center;
+  min-width: 120rpx;
+}
+
+.search-btn.loading {
+  opacity: 0.8;
+}
+
+/* Loading 小圆点 */
+.loading-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  height: 64rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #fff;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+.dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* 快捷标签 */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.tag {
+  padding: 10rpx 24rpx;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 2rpx solid #fbbf24;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #92400e;
+  transition: all 0.2s;
+}
+
+.tag:active {
+  transform: scale(0.95);
+  background: #fbbf24;
+  color: #fff;
+}
+
+/* 错误提示 */
+.error-box {
+  margin: 20rpx 24rpx;
+  padding: 24rpx;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  color: #dc2626;
+  text-align: center;
+}
+
+/* 结果列表 */
+.results {
+  margin: 24rpx 24rpx 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #78350f;
+  margin-bottom: 20rpx;
+  gap: 8rpx;
+}
+
+.section-icon {
+  font-size: 32rpx;
+}
+
+.result-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  border: 2rpx solid #f5f5f4;
+  transition: all 0.3s;
+}
+
+.result-card.active {
+  border-color: #d97706;
+  box-shadow: 0 4rpx 24rpx rgba(217, 119, 6, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-names {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.ancient-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #92400e;
+}
+
+.arrow {
+  color: #d1d5db;
+  font-size: 28rpx;
+}
+
+.modern-name {
+  font-size: 30rpx;
+  color: #44403c;
+  font-weight: 500;
+}
+
+.card-nav {
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.card-nav:active {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+.card-info {
+  margin-top: 12rpx;
+}
+
+.info-location {
+  font-size: 24rpx;
+  color: #78716c;
+}
+
+.card-desc {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 2rpx solid #f5f5f4;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.desc-text {
+  font-size: 26rpx;
+  color: #57534e;
+  line-height: 1.7;
+}
+
+.dynasty-tag {
+  display: inline-block;
+  margin-top: 16rpx;
+  padding: 8rpx 20rpx;
+  background: #fffbeb;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #92400e;
+}
+
+.card-hint {
+  margin-top: 8rpx;
+  text-align: center;
+}
+
+.card-hint text {
+  font-size: 22rpx;
+  color: #d6d3d1;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 40rpx;
+}
+
+.empty-icons {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-icon-main {
+  font-size: 80rpx;
+}
+
+.empty-icon-star {
+  font-size: 36rpx;
+  color: #d97706;
+}
+
+.empty-icon-map {
+  font-size: 60rpx;
+}
+
+.empty-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #78350f;
+  margin-bottom: 12rpx;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #a8a29e;
+  text-align: center;
+}
+
+.empty-examples {
+  margin-top: 32rpx;
+}
+
+.empty-examples text {
+  font-size: 24rpx;
+  color: #d97706;
+  letter-spacing: 4rpx;
+}
+
+/* 骨架屏 */
+.skeleton {
+  margin: 24rpx;
+}
+
+.skeleton-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+}
+
+.skeleton-line {
+  height: 28rpx;
+  border-radius: 8rpx;
+  background: #e7e5e4;
+  margin-bottom: 20rpx;
+}
+
+.skeleton-line.long { width: 70%; }
+.skeleton-line.medium { width: 50%; }
+.skeleton-line.short { width: 35%; }
+
+.shimmer {
+  background: linear-gradient(90deg, #e7e5e4 25%, #f5f5f4 50%, #e7e5e4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
