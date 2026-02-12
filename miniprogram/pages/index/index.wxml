@@ -3,8 +3,8 @@
   <view class="header">
     <view class="header-icon">🏛️</view>
     <view class="header-text">
-      <text class="header-title">古今地名对照</text>
-      <text class="header-subtitle">探索古代地名的现代位置</text>
+      <text class="header-title">舆图今昔</text>
+      <text class="header-subtitle">古今地名对照 · 探索千年地理变迁</text>
     </view>
   </view>
 
@@ -47,14 +47,45 @@
 
   <!-- 错误提示 -->
   <view class="error-box" wx:if="{{error}}">
-    <text>❌ {{error}}</text>
+    <text>⚠️ {{error}}</text>
+  </view>
+
+  <!-- 地图预览（有结果时显示） -->
+  <view class="map-preview-section" wx:if="{{results.length > 0}}">
+    <view class="section-header">
+      <view class="section-title-row">
+        <text class="section-icon">🗺️</text>
+        <text class="section-title-text">地图预览</text>
+      </view>
+      <view class="map-fullscreen-btn" bindtap="onOpenFullMap">
+        <text>全屏查看</text>
+      </view>
+    </view>
+    <view class="map-wrapper">
+      <map
+        id="previewMap"
+        class="preview-map"
+        latitude="{{mapCenter.latitude}}"
+        longitude="{{mapCenter.longitude}}"
+        scale="{{mapScale}}"
+        markers="{{markers}}"
+        show-compass="{{true}}"
+        enable-zoom="{{true}}"
+        enable-scroll="{{true}}"
+      />
+    </view>
   </view>
 
   <!-- 结果列表 -->
   <view class="results" wx:if="{{results.length > 0}}">
-    <view class="section-title">
-      <text class="section-icon">📜</text>
-      <text>查询记录</text>
+    <view class="section-header">
+      <view class="section-title-row">
+        <text class="section-icon">📜</text>
+        <text class="section-title-text">查询记录</text>
+      </view>
+      <view class="result-count">
+        <text>{{results.length}}条</text>
+      </view>
     </view>
 
     <view
@@ -70,8 +101,13 @@
           <text class="arrow">→</text>
           <text class="modern-name">{{item.modern_name}}</text>
         </view>
-        <view class="card-nav" catchtap="onNavigate" data-index="{{index}}">
-          <text>📍导航</text>
+        <view class="card-actions">
+          <view class="card-map-btn" catchtap="onLocateOnMap" data-index="{{index}}">
+            <text>🗺️</text>
+          </view>
+          <view class="card-nav" catchtap="onNavigate" data-index="{{index}}">
+            <text>📍导航</text>
+          </view>
         </view>
       </view>
 
@@ -100,7 +136,7 @@
       <text class="empty-icon-map">🗺️</text>
     </view>
     <text class="empty-title">探索古今地名</text>
-    <text class="empty-desc">搜索古代地名，发现跨越千年的地理变迁</text>
+    <text class="empty-desc">搜索古代地名，发现跨越千年的地理变迁与历史记忆</text>
     <view class="empty-examples">
       <text>长安 · 临安 · 金陵 · 汴梁</text>
     </view>

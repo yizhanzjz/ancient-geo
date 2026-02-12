@@ -1,6 +1,6 @@
 /* 全局样式 */
 page {
-  font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
-  background-color: #fef3c7;
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Serif SC', 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  background-color: #f5f0e8;
   color: #1c1917;
 }

@@ -2,21 +2,22 @@
 .container {
   min-height: 100vh;
   padding-bottom: 60rpx;
+  background: #f5f0e8;
 }
 
-/* Header */
+/* Header - 深蓝金色古风 */
 .header {
   display: flex;
   align-items: center;
   padding: 40rpx 32rpx 32rpx;
-  background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #78350f 100%);
+  background: linear-gradient(135deg, #1a2640 0%, #243350 50%, #1e2d48 100%);
   color: #fff;
 }
 
 .header-icon {
   font-size: 56rpx;
   margin-right: 20rpx;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(218, 180, 80, 0.15);
   width: 80rpx;
   height: 80rpx;
   border-radius: 20rpx;
@@ -31,32 +32,33 @@
 }
 
 .header-title {
-  font-size: 40rpx;
+  font-size: 42rpx;
   font-weight: bold;
-  letter-spacing: 4rpx;
+  letter-spacing: 6rpx;
+  color: #e8d5a0;
 }
 
 .header-subtitle {
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: rgba(232, 213, 160, 0.6);
+  margin-top: 6rpx;
+  letter-spacing: 2rpx;
 }
 
 /* 搜索区域 */
 .search-section {
   margin: 24rpx 24rpx 0;
   padding: 28rpx;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 24rpx;
-  box-shadow: 0 4rpx 24rpx rgba(146, 64, 14, 0.08);
+  box-shadow: 0 4rpx 24rpx rgba(26, 38, 64, 0.06);
 }
 
 .search-box {
   display: flex;
   align-items: center;
   background: #fff;
-  border: 2rpx solid #e5e7eb;
+  border: 2rpx solid #e2ddd4;
   border-radius: 16rpx;
   padding: 0 8rpx 0 20rpx;
   height: 80rpx;
@@ -75,13 +77,13 @@
 }
 
 .placeholder {
-  color: #9ca3af;
+  color: #b8b0a4;
   font-size: 26rpx;
 }
 
 .search-btn {
-  background: linear-gradient(135deg, #b45309, #92400e);
-  color: #fff;
+  background: linear-gradient(135deg, #2a3a5c, #1a2640);
+  color: #e8d5a0;
   font-size: 28rpx;
   font-weight: 600;
   padding: 0 32rpx;
@@ -108,7 +110,7 @@
 .dot {
   width: 12rpx;
   height: 12rpx;
-  background: #fff;
+  background: #e8d5a0;
   border-radius: 50%;
   animation: bounce 1.4s infinite ease-in-out both;
 }
@@ -132,18 +134,18 @@
 
 .tag {
   padding: 10rpx 24rpx;
-  background: linear-gradient(135deg, #fffbeb, #fef3c7);
-  border: 2rpx solid #fbbf24;
+  background: linear-gradient(135deg, #f9f5ec, #f0ead8);
+  border: 2rpx solid #d4c9a8;
   border-radius: 32rpx;
   font-size: 26rpx;
-  color: #92400e;
+  color: #5c4a2a;
   transition: all 0.2s;
 }
 
 .tag:active {
   transform: scale(0.95);
-  background: #fbbf24;
-  color: #fff;
+  background: #d4c9a8;
+  color: #2a1f0e;
 }
 
 /* 错误提示 */
@@ -157,18 +159,21 @@
   text-align: center;
 }
 
-/* 结果列表 */
-.results {
+/* 地图预览 */
+.map-preview-section {
   margin: 24rpx 24rpx 0;
 }
 
-.section-title {
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.section-title-row {
   display: flex;
   align-items: center;
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #78350f;
-  margin-bottom: 20rpx;
   gap: 8rpx;
 }
 
@@ -176,19 +181,58 @@
   font-size: 32rpx;
 }
 
+.section-title-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a2640;
+}
+
+.map-fullscreen-btn {
+  padding: 8rpx 20rpx;
+  background: #1a2640;
+  color: #e8d5a0;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+}
+
+.map-fullscreen-btn:active {
+  opacity: 0.8;
+}
+
+.map-wrapper {
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(26, 38, 64, 0.1);
+}
+
+.preview-map {
+  width: 100%;
+  height: 400rpx;
+}
+
+/* 结果列表 */
+.results {
+  margin: 24rpx 24rpx 0;
+}
+
+.result-count {
+  font-size: 22rpx;
+  color: #a09888;
+}
+
 .result-card {
   background: #fff;
   border-radius: 20rpx;
   padding: 28rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-  border: 2rpx solid #f5f5f4;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.03);
+  border: 2rpx solid #ede8df;
   transition: all 0.3s;
 }
 
 .result-card.active {
-  border-color: #d97706;
-  box-shadow: 0 4rpx 24rpx rgba(217, 119, 6, 0.15);
+  border-color: #c4a962;
+  box-shadow: 0 4rpx 24rpx rgba(196, 169, 98, 0.15);
 }
 
 .card-header {
@@ -201,31 +245,49 @@
   display: flex;
   align-items: baseline;
   gap: 12rpx;
+  flex: 1;
 }
 
 .ancient-name {
   font-size: 36rpx;
   font-weight: bold;
-  color: #92400e;
+  color: #1a2640;
 }
 
 .arrow {
-  color: #d1d5db;
+  color: #c4c0b8;
   font-size: 28rpx;
 }
 
 .modern-name {
   font-size: 30rpx;
-  color: #44403c;
+  color: #5c5548;
   font-weight: 500;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.card-map-btn {
+  padding: 10rpx 16rpx;
+  background: #f0ead8;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.card-map-btn:active {
+  opacity: 0.7;
 }
 
 .card-nav {
   padding: 12rpx 24rpx;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #2a3a5c, #1a2640);
   border-radius: 12rpx;
   font-size: 24rpx;
-  color: #fff;
+  color: #e8d5a0;
   font-weight: 600;
 }
 
@@ -240,13 +302,13 @@
 
 .info-location {
   font-size: 24rpx;
-  color: #78716c;
+  color: #8a8278;
 }
 
 .card-desc {
   margin-top: 16rpx;
   padding-top: 16rpx;
-  border-top: 2rpx solid #f5f5f4;
+  border-top: 2rpx solid #f0ebe2;
   animation: slideDown 0.3s ease;
 }
 
@@ -263,7 +325,7 @@
 
 .desc-text {
   font-size: 26rpx;
-  color: #57534e;
+  color: #5c5548;
   line-height: 1.7;
 }
 
@@ -271,10 +333,11 @@
   display: inline-block;
   margin-top: 16rpx;
   padding: 8rpx 20rpx;
-  background: #fffbeb;
+  background: #f9f5ec;
+  border: 1rpx solid #e2ddd4;
   border-radius: 8rpx;
   font-size: 24rpx;
-  color: #92400e;
+  color: #5c4a2a;
 }
 
 .card-hint {
@@ -284,7 +347,7 @@
 
 .card-hint text {
   font-size: 22rpx;
-  color: #d6d3d1;
+  color: #c4c0b8;
 }
 
 /* 空状态 */
@@ -308,7 +371,7 @@
 
 .empty-icon-star {
   font-size: 36rpx;
-  color: #d97706;
+  color: #c4a962;
 }
 
 .empty-icon-map {
@@ -318,13 +381,13 @@
 .empty-title {
   font-size: 34rpx;
   font-weight: 600;
-  color: #78350f;
+  color: #1a2640;
   margin-bottom: 12rpx;
 }
 
 .empty-desc {
   font-size: 26rpx;
-  color: #a8a29e;
+  color: #a09888;
   text-align: center;
 }
 
@@ -334,7 +397,7 @@
 
 .empty-examples text {
   font-size: 24rpx;
-  color: #d97706;
+  color: #c4a962;
   letter-spacing: 4rpx;
 }
 
@@ -352,7 +415,7 @@
 .skeleton-line {
   height: 28rpx;
   border-radius: 8rpx;
-  background: #e7e5e4;
+  background: #ede8df;
   margin-bottom: 20rpx;
 }
 
@@ -361,7 +424,7 @@
 .skeleton-line.short { width: 35%; }
 
 .shimmer {
-  background: linear-gradient(90deg, #e7e5e4 25%, #f5f5f4 50%, #e7e5e4 75%);
+  background: linear-gradient(90deg, #ede8df 25%, #f5f0e8 50%, #ede8df 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

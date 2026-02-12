@@ -7,6 +7,9 @@ Page({
     error: null,
     results: [],
     activeIndex: -1,
+    mapCenter: { latitude: 34.26, longitude: 108.94 },
+    mapScale: 5,
+    markers: [],
     examplePlaces: [
       { name: '长安', emoji: '🏯' },
       { name: '临安', emoji: '🌊' },
@@ -32,25 +35,53 @@ Page({
     try {
       const result = await queryPlace(name)
 
-      // 去重检查
       const exists = this.data.results.some(
         r => r.ancient_name === result.ancient_name && r.modern_name === result.modern_name
       )
 
+      let newResults = this.data.results
+      let activeIdx = 0
+
       if (!exists) {
-        this.setData({
-          results: [result, ...this.data.results],
-          activeIndex: 0,
-        })
+        newResults = [result, ...this.data.results]
       } else {
-        // 找到已存在的 index
-        const idx = this.data.results.findIndex(
+        activeIdx = this.data.results.findIndex(
           r => r.ancient_name === result.ancient_name && r.modern_name === result.modern_name
         )
-        this.setData({ activeIndex: idx })
       }
 
-      this.setData({ query: '' })
+      // Update markers
+      const markers = newResults.map((r, i) => ({
+        id: i,
+        latitude: r.latitude,
+        longitude: r.longitude,
+        title: `${r.ancient_name}（${r.modern_name}）`,
+        callout: {
+          content: `${r.ancient_name} → ${r.modern_name}`,
+          color: '#1a2640',
+          bgColor: '#fffbeb',
+          borderColor: '#d97706',
+          borderWidth: 1,
+          borderRadius: 8,
+          padding: 6,
+          display: 'ALWAYS',
+          fontSize: 12,
+        },
+        width: 28,
+        height: 36,
+      }))
+
+      this.setData({
+        results: newResults,
+        activeIndex: activeIdx,
+        query: '',
+        markers,
+        mapCenter: {
+          latitude: result.latitude,
+          longitude: result.longitude,
+        },
+        mapScale: 10,
+      })
     } catch (err) {
       this.setData({ error: err.message || '查询失败' })
     } finally {
@@ -71,11 +102,36 @@ Page({
     })
   },
 
+  onLocateOnMap(e) {
+    const index = e.currentTarget.dataset.index
+    const result = this.data.results[index]
+    if (result) {
+      this.setData({
+        mapCenter: {
+          latitude: result.latitude,
+          longitude: result.longitude,
+        },
+        mapScale: 12,
+        activeIndex: index,
+      })
+      // Scroll to top to see map
+      wx.pageScrollTo({ scrollTop: 0, duration: 300 })
+    }
+  },
+
   onNavigate(e) {
     const index = e.currentTarget.dataset.index
     const result = this.data.results[index]
     if (result) {
       openLocation(result)
     }
-  }
+  },
+
+  onOpenFullMap() {
+    // Pass results to map page via global data or event channel
+    const app = getApp()
+    app.globalData.mapResults = this.data.results
+    app.globalData.mapActiveIndex = this.data.activeIndex
+    wx.navigateTo({ url: '/pages/map/map' })
+  },
 })

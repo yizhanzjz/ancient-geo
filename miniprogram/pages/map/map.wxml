@@ -1,0 +1,79 @@
+<view class="map-page">
+  <!-- 全屏地图 -->
+  <map
+    id="fullMap"
+    class="full-map"
+    latitude="{{mapCenter.latitude}}"
+    longitude="{{mapCenter.longitude}}"
+    scale="{{mapScale}}"
+    markers="{{markers}}"
+    show-compass="{{true}}"
+    show-scale="{{true}}"
+    enable-zoom="{{true}}"
+    enable-scroll="{{true}}"
+    enable-rotate="{{true}}"
+    enable-3D="{{true}}"
+    bindmarkertap="onMarkerTap"
+  />
+
+  <!-- 底部信息卡片 -->
+  <view class="bottom-panel {{activeResult ? 'show' : ''}}">
+    <view class="panel-handle" bindtap="onClosePanel">
+      <view class="handle-bar"></view>
+    </view>
+
+    <view class="panel-content" wx:if="{{activeResult}}">
+      <view class="panel-header">
+        <view class="panel-names">
+          <text class="panel-ancient">{{activeResult.ancient_name}}</text>
+          <text class="panel-arrow">→</text>
+          <text class="panel-modern">{{activeResult.modern_name}}</text>
+        </view>
+        <view class="panel-nav-btn" bindtap="onNavigate">
+          <text>📍 导航</text>
+        </view>
+      </view>
+
+      <view class="panel-info">
+        <text class="panel-location">📌 {{activeResult.province}} · {{activeResult.latitude}}°N, {{activeResult.longitude}}°E</text>
+      </view>
+
+      <view class="panel-desc">
+        <text class="panel-desc-text">{{activeResult.description}}</text>
+      </view>
+
+      <view class="panel-dynasty">
+        <text>📜 {{activeResult.dynasty_info}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 地点列表按钮 -->
+  <view class="list-toggle" bindtap="onToggleList">
+    <text>📋 {{results.length}}</text>
+  </view>
+
+  <!-- 地点列表弹出层 -->
+  <view class="list-overlay {{showList ? 'show' : ''}}" bindtap="onToggleList">
+    <view class="list-panel" catchtap="">
+      <view class="list-title">
+        <text>已查询地点</text>
+        <view class="list-close" bindtap="onToggleList">✕</view>
+      </view>
+      <scroll-view scroll-y class="list-scroll">
+        <view
+          class="list-item {{activeMarkerIndex === index ? 'active' : ''}}"
+          wx:for="{{results}}"
+          wx:key="index"
+          bindtap="onListItemTap"
+          data-index="{{index}}"
+        >
+          <text class="list-item-name">{{item.ancient_name}}</text>
+          <text class="list-item-arrow">→</text>
+          <text class="list-item-modern">{{item.modern_name}}</text>
+          <text class="list-item-province">{{item.province}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

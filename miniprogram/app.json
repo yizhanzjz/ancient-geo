@@ -1,14 +1,20 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/map/map"
   ],
   "window": {
-    "navigationBarTitleText": "古今地名对照",
-    "navigationBarBackgroundColor": "#92400e",
+    "navigationBarTitleText": "舆图今昔",
+    "navigationBarBackgroundColor": "#1a2640",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#fef3c7",
+    "backgroundColor": "#f5f0e8",
     "backgroundTextStyle": "dark"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于在地图上显示古今地名位置"
+    }
+  }
 }
