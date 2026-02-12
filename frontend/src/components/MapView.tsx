@@ -32,7 +32,6 @@ function loadAMapScript(): Promise<any> {
       return;
     }
 
-    // Set security config
     window._AMapSecurityConfig = {
       securityJsCode: process.env.NEXT_PUBLIC_AMAP_SECRET || "",
     };
@@ -50,12 +49,16 @@ function loadAMapScript(): Promise<any> {
   });
 }
 
+type MapLayer = "standard" | "satellite" | "terrain";
+
 export default function MapView({ results, activeResult }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const infoWindowRef = useRef<any>(null);
+  const extraLayersRef = useRef<any[]>([]);
   const [AMap, setAMap] = useState<any>(null);
+  const [currentLayer, setCurrentLayer] = useState<MapLayer>("terrain");
 
   // Initialize map
   useEffect(() => {
@@ -72,6 +75,12 @@ export default function MapView({ results, activeResult }: MapViewProps) {
           viewMode: "2D",
           mapStyle: "amap://styles/normal",
         });
+
+        // Default: add satellite + roadnet for terrain feel
+        const satellite = new AMapModule.TileLayer.Satellite();
+        const roadNet = new AMapModule.TileLayer.RoadNet();
+        map.add([satellite, roadNet]);
+        extraLayersRef.current = [satellite, roadNet];
 
         mapInstanceRef.current = map;
         setAMap(AMapModule);
@@ -91,6 +100,30 @@ export default function MapView({ results, activeResult }: MapViewProps) {
     };
   }, []);
 
+  // Switch layers
+  useEffect(() => {
+    if (!AMap || !mapInstanceRef.current) return;
+    const map = mapInstanceRef.current;
+
+    // Remove existing extra layers
+    if (extraLayersRef.current.length > 0) {
+      map.remove(extraLayersRef.current);
+      extraLayersRef.current = [];
+    }
+
+    if (currentLayer === "satellite") {
+      const sat = new AMap.TileLayer.Satellite();
+      map.add(sat);
+      extraLayersRef.current = [sat];
+    } else if (currentLayer === "terrain") {
+      const sat = new AMap.TileLayer.Satellite();
+      const road = new AMap.TileLayer.RoadNet();
+      map.add([sat, road]);
+      extraLayersRef.current = [sat, road];
+    }
+    // "standard" uses only the default base layer
+  }, [AMap, currentLayer]);
+
   // Update markers when results change
   useEffect(() => {
     if (!AMap || !mapInstanceRef.current) return;
@@ -103,12 +136,10 @@ export default function MapView({ results, activeResult }: MapViewProps) {
     });
     markersRef.current = [];
 
-    // Close existing info window
     if (infoWindowRef.current) {
       infoWindowRef.current.close();
     }
 
-    // Add new markers
     results.forEach((r) => {
       const isActive =
         activeResult?.ancient_name === r.ancient_name &&
@@ -147,7 +178,6 @@ export default function MapView({ results, activeResult }: MapViewProps) {
         infoWindowRef.current = infoWindow;
       });
 
-      // Auto open for active result
       if (isActive) {
         setTimeout(() => {
           infoWindow.open(map, marker.getPosition());
@@ -172,5 +202,29 @@ export default function MapView({ results, activeResult }: MapViewProps) {
     );
   }, [activeResult]);
 
-  return <div ref={mapRef} className="w-full h-full" />;
+  return (
+    <div className="relative w-full h-full">
+      <div ref={mapRef} className="w-full h-full" />
+      {/* Layer switcher */}
+      <div className="absolute top-3 right-3 bg-white rounded-lg shadow-md overflow-hidden z-10 flex text-sm">
+        {[
+          { key: "terrain" as MapLayer, label: "地形" },
+          { key: "satellite" as MapLayer, label: "卫星" },
+          { key: "standard" as MapLayer, label: "标准" },
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setCurrentLayer(key)}
+            className={`px-3 py-1.5 transition-colors ${
+              currentLayer === key
+                ? "bg-amber-700 text-white"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
