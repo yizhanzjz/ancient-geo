@@ -11,7 +11,7 @@
     "modern_name": "南京市",
     "province": "江苏省",
     "latitude": 32.06,
-    "longitude": 118.80,
+    "longitude": 118.8,
     "description": "金陵是南京的古称，因楚威王在此埋金而得名。东吴、东晋、南朝宋齐梁陈、五代南唐、明初、太平天国、中华民国均在此建都。现为江苏省省会南京市。",
     "dynasty_info": "东吴、东晋、南朝（宋齐梁陈）、明初、中华民国等朝代都城"
   },
@@ -19,14 +19,14 @@
     "modern_name": "南京市",
     "province": "江苏省",
     "latitude": 32.06,
-    "longitude": 118.80,
+    "longitude": 118.8,
     "description": "建康是南京在六朝时期的名称，东晋和南朝宋齐梁陈均以此为都城。建康城规模宏大，是当时南方的政治、经济和文化中心。现为江苏省省会南京市。",
     "dynasty_info": "东晋、南朝宋齐梁陈都城"
   },
   "汴梁": {
     "modern_name": "开封市",
     "province": "河南省",
-    "latitude": 34.80,
+    "latitude": 34.8,
     "longitude": 114.35,
     "description": "汴梁即汴京，是开封的古称。北宋定都于此，称东京汴梁，是当时世界上最繁华的城市之一。现为河南省开封市。",
     "dynasty_info": "北宋都城，后晋、后汉、后周等五代王朝也曾建都于此"
@@ -34,7 +34,7 @@
   "汴京": {
     "modern_name": "开封市",
     "province": "河南省",
-    "latitude": 34.80,
+    "latitude": 34.8,
     "longitude": 114.35,
     "description": "汴京是北宋都城开封的称呼，也称东京。宋代汴京人口超过百万，商业繁荣，文化昌盛。现为河南省开封市。",
     "dynasty_info": "北宋都城"
@@ -67,7 +67,7 @@
     "modern_name": "北京市",
     "province": "北京市",
     "latitude": 39.91,
-    "longitude": 116.40,
+    "longitude": 116.4,
     "description": "大都是元朝的都城，由忽必烈于1267年开始营建。大都城规模宏大，是当时世界上最大的城市之一。现为中华人民共和国首都北京市。",
     "dynasty_info": "元朝都城"
   },
@@ -75,7 +75,7 @@
     "modern_name": "北京市",
     "province": "北京市",
     "latitude": 39.91,
-    "longitude": 116.40,
+    "longitude": 116.4,
     "description": "北平是北京在明初和民国时期的名称。明成祖迁都北京后改称京师，民国时期国民政府迁都南京后改北京为北平。1949年新中国成立后复称北京。",
     "dynasty_info": "明初称北平，后为明清都城，民国时期复称北平"
   },
@@ -83,14 +83,14 @@
     "modern_name": "北京市",
     "province": "北京市",
     "latitude": 39.91,
-    "longitude": 116.40,
+    "longitude": 116.4,
     "description": "燕京是北京的古称之一，因战国时期燕国都城蓟城位于此地而得名。辽代以此为南京（陪都），金代正式建都称中都。现为北京市。",
     "dynasty_info": "战国燕国都城，辽南京，金中都"
   },
   "姑苏": {
     "modern_name": "苏州市",
     "province": "江苏省",
-    "latitude": 31.30,
+    "latitude": 31.3,
     "longitude": 120.58,
     "description": "姑苏是苏州的古称，因城西南的姑苏山而得名。春秋时期吴国在此建都，称阖闾城。苏州自古繁华，有人间天堂之誉。现为江苏省苏州市。",
     "dynasty_info": "春秋吴国都城"
@@ -138,7 +138,7 @@
   "会稽": {
     "modern_name": "绍兴市",
     "province": "浙江省",
-    "latitude": 30.00,
+    "latitude": 30.0,
     "longitude": 120.58,
     "description": "会稽是绍兴的古称，相传大禹在此会诸侯、计功德故名会稽。越王勾践曾以此为都城。现为浙江省绍兴市。",
     "dynasty_info": "春秋越国都城"
@@ -171,7 +171,7 @@
     "modern_name": "北京市",
     "province": "北京市",
     "latitude": 39.91,
-    "longitude": 116.40,
+    "longitude": 116.4,
     "description": "幽州是古九州之一，治所在今北京一带。唐代安禄山以幽州为根据地发动安史之乱。现为北京市一带。",
     "dynasty_info": "古九州之一，唐代安史之乱发源地"
   },
@@ -195,8 +195,408 @@
     "modern_name": "大同市",
     "province": "山西省",
     "latitude": 40.08,
-    "longitude": 113.30,
+    "longitude": 113.3,
     "description": "平城是北魏前期的都城，位于今山西省大同市。北魏在此建都近百年，云冈石窟即开凿于此时期。现为山西省大同市。",
     "dynasty_info": "北魏前期都城"
+  },
+  "邯郸": {
+    "modern_name": "邯郸市",
+    "province": "河北省",
+    "latitude": 36.63,
+    "longitude": 114.54,
+    "description": "邯郸是战国时期赵国的都城，成语之都。邯郸学步、围魏救赵等典故都与此地有关。现为河北省邯郸市。",
+    "dynasty_info": "战国赵国都城"
+  },
+  "蓟": {
+    "modern_name": "北京市",
+    "province": "北京市",
+    "latitude": 39.91,
+    "longitude": 116.4,
+    "description": "蓟是周朝时期的古国和古城，也是战国燕国的都城之一。现为北京市区域。",
+    "dynasty_info": "西周蓟国、战国燕国都城"
+  },
+  "应天": {
+    "modern_name": "南京市",
+    "province": "江苏省",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "description": "应天是明朝初年南京的名称（应天府）。朱元璋定都于此，后明成祖迁都北京。现为南京市。",
+    "dynasty_info": "明初都城（应天府）"
+  },
+  "上京": {
+    "modern_name": "巴林左旗",
+    "province": "内蒙古自治区",
+    "latitude": 43.98,
+    "longitude": 119.38,
+    "description": "上京是辽朝的首都，位于今内蒙古自治区巴林左旗林东镇南。辽太祖耶律阿保机建都于此。",
+    "dynasty_info": "辽朝首都"
+  },
+  "中都": {
+    "modern_name": "北京市",
+    "province": "北京市",
+    "latitude": 39.87,
+    "longitude": 116.4,
+    "description": "中都是金朝的都城名称，金海陵王迁都于此。中都城址在今北京市西南部。",
+    "dynasty_info": "金朝都城"
+  },
+  "盛京": {
+    "modern_name": "沈阳市",
+    "province": "辽宁省",
+    "latitude": 41.8,
+    "longitude": 123.43,
+    "description": "盛京是清朝入关前的都城，即今沈阳。努尔哈赤迁都于此，皇太极改称盛京。现为辽宁省省会沈阳市。",
+    "dynasty_info": "清朝入关前都城（陪都）"
+  },
+  "广陵": {
+    "modern_name": "扬州市",
+    "province": "江苏省",
+    "latitude": 32.39,
+    "longitude": 119.42,
+    "description": "广陵是扬州的古称。汉代设广陵郡，嵇康《广陵散》即以此地命名。现为江苏省扬州市。",
+    "dynasty_info": "汉代广陵郡、隋唐繁华重镇"
+  },
+  "武昌": {
+    "modern_name": "武汉市武昌区",
+    "province": "湖北省",
+    "latitude": 30.55,
+    "longitude": 114.34,
+    "description": "武昌因三国时期孙权在此筑城而得名，取'以武而昌'之意。辛亥革命武昌起义在此爆发。现为武汉市武昌区。",
+    "dynasty_info": "三国东吴重镇，辛亥革命发源地"
+  },
+  "江夏": {
+    "modern_name": "武汉市",
+    "province": "湖北省",
+    "latitude": 30.58,
+    "longitude": 114.27,
+    "description": "江夏是武汉的古称之一，汉代设江夏郡。三国时期是荆州的重要组成部分。现为武汉市江夏区。",
+    "dynasty_info": "汉代江夏郡，三国重镇"
+  },
+  "番禺": {
+    "modern_name": "广州市",
+    "province": "广东省",
+    "latitude": 23.13,
+    "longitude": 113.26,
+    "description": "番禺是广州的古称，秦始皇统一岭南后设南海郡番禺县。赵佗在此建立南越国。现为广东省省会广州市。",
+    "dynasty_info": "秦南海郡治所，南越国都城"
+  },
+  "交趾": {
+    "modern_name": "河内市（越南）",
+    "province": "越南",
+    "latitude": 21.03,
+    "longitude": 105.85,
+    "description": "交趾是越南北部的古称，汉武帝设交趾郡。唐代设安南都护府。现为越南首都河内市一带。",
+    "dynasty_info": "汉唐时期中国郡县，后独立为越南"
+  },
+  "镐京": {
+    "modern_name": "西安市长安区",
+    "province": "陕西省",
+    "latitude": 34.18,
+    "longitude": 108.88,
+    "description": "镐京是西周的都城，周武王灭商后建都于此。与丰京合称丰镐，是中国历史上最早的大型都城之一。",
+    "dynasty_info": "西周都城"
+  },
+  "丰京": {
+    "modern_name": "西安市长安区",
+    "province": "陕西省",
+    "latitude": 34.18,
+    "longitude": 108.82,
+    "description": "丰京是周文王所建的都城，与镐京隔沣河相望，合称丰镐。是西周王朝的政治中心。",
+    "dynasty_info": "西周都城（丰镐之一）"
+  },
+  "殷": {
+    "modern_name": "安阳市",
+    "province": "河南省",
+    "latitude": 36.1,
+    "longitude": 114.35,
+    "description": "殷墟是商朝后期的都城遗址，位于今河南省安阳市。殷墟出土的甲骨文是中国最早的成熟文字。",
+    "dynasty_info": "商朝后期都城"
+  },
+  "朝歌": {
+    "modern_name": "淇县",
+    "province": "河南省",
+    "latitude": 35.61,
+    "longitude": 114.2,
+    "description": "朝歌是商朝末期的都城，纣王在此统治。封神演义中的故事多发生于此。现为河南省淇县。",
+    "dynasty_info": "商朝末期都城"
+  },
+  "涿郡": {
+    "modern_name": "涿州市",
+    "province": "河北省",
+    "latitude": 39.49,
+    "longitude": 115.97,
+    "description": "涿郡是刘备的故乡，三国演义中桃园结义的地点。隋炀帝从涿郡出发开凿大运河。现为河北省涿州市。",
+    "dynasty_info": "汉代涿郡，三国刘备故里"
+  },
+  "许昌": {
+    "modern_name": "许昌市",
+    "province": "河南省",
+    "latitude": 34.04,
+    "longitude": 113.85,
+    "description": "许昌古称许，是曹操迎汉献帝建都之地（许都）。三国时期魏国实际政治中心之一。现为河南省许昌市。",
+    "dynasty_info": "东汉末年许都，曹魏五都之一"
+  },
+  "许都": {
+    "modern_name": "许昌市",
+    "province": "河南省",
+    "latitude": 34.04,
+    "longitude": 113.85,
+    "description": "许都即许昌，曹操迎汉献帝至此，挟天子以令诸侯。建安文学的重要发祥地。",
+    "dynasty_info": "东汉末年都城"
+  },
+  "寿春": {
+    "modern_name": "寿县",
+    "province": "安徽省",
+    "latitude": 32.57,
+    "longitude": 116.78,
+    "description": "寿春是楚国晚期的都城，也是淝水之战的发生地。现为安徽省寿县。",
+    "dynasty_info": "战国楚国晚期都城"
+  },
+  "彭城": {
+    "modern_name": "徐州市",
+    "province": "江苏省",
+    "latitude": 34.26,
+    "longitude": 117.18,
+    "description": "彭城是徐州的古称，楚汉相争时项羽以此为都城（西楚都城）。刘邦也是徐州沛县人。现为江苏省徐州市。",
+    "dynasty_info": "西楚霸王项羽都城"
+  },
+  "下邳": {
+    "modern_name": "睢宁县古邳镇",
+    "province": "江苏省",
+    "latitude": 34.0,
+    "longitude": 117.95,
+    "description": "下邳是三国时期重要的军事据点。吕布在此被曹操围攻擒获。张良也曾在下邳桥上遇黄石公。",
+    "dynasty_info": "汉代下邳国，三国军事重镇"
+  },
+  "濠州": {
+    "modern_name": "凤阳县",
+    "province": "安徽省",
+    "latitude": 32.87,
+    "longitude": 117.56,
+    "description": "濠州是明太祖朱元璋的故乡，位于今安徽省凤阳县。朱元璋从此起兵，最终建立大明王朝。",
+    "dynasty_info": "明太祖朱元璋故里"
+  },
+  "庐州": {
+    "modern_name": "合肥市",
+    "province": "安徽省",
+    "latitude": 31.82,
+    "longitude": 117.23,
+    "description": "庐州是合肥的古称，三国时期曹操与孙权多次在此交战。庐州曾是安徽的政治中心。现为安徽省省会合肥市。",
+    "dynasty_info": "三国兵家必争之地"
+  },
+  "夷陵": {
+    "modern_name": "宜昌市",
+    "province": "湖北省",
+    "latitude": 30.69,
+    "longitude": 111.28,
+    "description": "夷陵是宜昌的古称。三国时期刘备伐吴，陆逊在此火烧连营七百里（夷陵之战）。现为湖北省宜昌市。",
+    "dynasty_info": "三国夷陵之战发生地"
+  },
+  "赤壁": {
+    "modern_name": "赤壁市",
+    "province": "湖北省",
+    "latitude": 29.72,
+    "longitude": 113.9,
+    "description": "赤壁因三国赤壁之战而闻名天下。孙刘联军在此以少胜多击败曹操。现为湖北省赤壁市。",
+    "dynasty_info": "三国赤壁之战发生地"
+  },
+  "柴桑": {
+    "modern_name": "九江市",
+    "province": "江西省",
+    "latitude": 29.71,
+    "longitude": 115.99,
+    "description": "柴桑是三国时期东吴的军事重镇，周瑜、鲁肃等都曾驻守于此。东晋陶渊明也是柴桑人。现为江西省九江市。",
+    "dynasty_info": "三国东吴重镇，陶渊明故里"
+  },
+  "豫章": {
+    "modern_name": "南昌市",
+    "province": "江西省",
+    "latitude": 28.68,
+    "longitude": 115.86,
+    "description": "豫章是南昌的古称，汉代设豫章郡。王勃滕王阁序中有豫章故郡洪都新府之句。现为江西省省会南昌市。",
+    "dynasty_info": "汉代豫章郡"
+  },
+  "潭州": {
+    "modern_name": "长沙市",
+    "province": "湖南省",
+    "latitude": 28.23,
+    "longitude": 112.94,
+    "description": "潭州是长沙的古称之一，唐宋时期常用。长沙是楚文化的重要发祥地之一。现为湖南省省会长沙市。",
+    "dynasty_info": "唐宋潭州，楚文化重要城市"
+  },
+  "长沙": {
+    "modern_name": "长沙市",
+    "province": "湖南省",
+    "latitude": 28.23,
+    "longitude": 112.94,
+    "description": "长沙有三千年建城史，是楚文化和湖湘文化的发祥地。马王堆汉墓在此发现。现为湖南省省会。",
+    "dynasty_info": "楚国重镇，汉长沙国"
+  },
+  "凉州": {
+    "modern_name": "武威市",
+    "province": "甘肃省",
+    "latitude": 37.93,
+    "longitude": 102.63,
+    "description": "凉州是武威的古称，汉代河西四郡之一。王翰诗葡萄美酒夜光杯描绘的就是凉州风情。现为甘肃省武威市。",
+    "dynasty_info": "汉代河西四郡之一，五凉政权中心"
+  },
+  "敦煌": {
+    "modern_name": "敦煌市",
+    "province": "甘肃省",
+    "latitude": 40.14,
+    "longitude": 94.66,
+    "description": "敦煌是古丝绸之路上的重镇，汉武帝设敦煌郡。莫高窟是世界文化遗产，保存了大量佛教艺术。现为甘肃省敦煌市。",
+    "dynasty_info": "汉代河西四郡之一，丝绸之路重镇"
+  },
+  "兰陵": {
+    "modern_name": "兰陵县",
+    "province": "山东省",
+    "latitude": 34.86,
+    "longitude": 118.07,
+    "description": "兰陵是古代著名的酒乡和文化名地，李白有兰陵美酒郁金香之诗句。荀子曾任兰陵令。现为山东省兰陵县。",
+    "dynasty_info": "战国时期荀子任兰陵令"
+  },
+  "琅琊": {
+    "modern_name": "临沂市",
+    "province": "山东省",
+    "latitude": 35.1,
+    "longitude": 118.35,
+    "description": "琅琊是古代山东的重要郡国，王羲之故里。琅琊王氏是东晋最显赫的门阀士族。现为山东省临沂市一带。",
+    "dynasty_info": "秦琅琊郡，东晋琅琊王氏故里"
+  },
+  "稷下": {
+    "modern_name": "淄博市临淄区",
+    "province": "山东省",
+    "latitude": 36.83,
+    "longitude": 118.31,
+    "description": "稷下学宫位于齐国都城临淄稷门附近，是战国时期最著名的学术中心。荀子、孟子等都曾在此讲学。",
+    "dynasty_info": "战国齐国稷下学宫所在地"
+  },
+  "临淄": {
+    "modern_name": "淄博市临淄区",
+    "province": "山东省",
+    "latitude": 36.83,
+    "longitude": 118.31,
+    "description": "临淄是春秋战国时期齐国的都城，当时是最大最繁华的城市之一。现为山东省淄博市临淄区。",
+    "dynasty_info": "春秋战国齐国都城"
+  },
+  "曲阜": {
+    "modern_name": "曲阜市",
+    "province": "山东省",
+    "latitude": 35.6,
+    "longitude": 116.99,
+    "description": "曲阜是孔子的故乡，鲁国的都城。三孔（孔庙、孔林、孔府）是世界文化遗产。现为山东省曲阜市。",
+    "dynasty_info": "春秋鲁国都城，孔子故里"
+  },
+  "泉州": {
+    "modern_name": "泉州市",
+    "province": "福建省",
+    "latitude": 24.87,
+    "longitude": 118.68,
+    "description": "泉州古称刺桐城，宋元时期是世界最大的港口之一。马可波罗称其为光明之城。现为福建省泉州市。",
+    "dynasty_info": "宋元时期东方第一大港"
+  },
+  "杭州": {
+    "modern_name": "杭州市",
+    "province": "浙江省",
+    "latitude": 30.25,
+    "longitude": 120.17,
+    "description": "杭州自古有人间天堂之誉。南宋以临安（杭州）为行在。西湖是中国最著名的景点之一。现为浙江省省会。",
+    "dynasty_info": "南宋行在，五代吴越国都城"
+  },
+  "大理": {
+    "modern_name": "大理市",
+    "province": "云南省",
+    "latitude": 25.59,
+    "longitude": 100.23,
+    "description": "大理是大理国的都城，段氏家族在此统治三百余年。金庸小说天龙八部中的段誉即大理国王子。现为云南省大理市。",
+    "dynasty_info": "南诏、大理国都城"
+  },
+  "交州": {
+    "modern_name": "河内市（越南）",
+    "province": "越南/广西",
+    "latitude": 21.03,
+    "longitude": 105.85,
+    "description": "交州是汉代设立的州，辖今广东、广西南部及越南北部。后来成为越南地区的代称。",
+    "dynasty_info": "汉代交州，唐代安南都护府"
+  },
+  "桂林": {
+    "modern_name": "桂林市",
+    "province": "广西壮族自治区",
+    "latitude": 25.27,
+    "longitude": 110.29,
+    "description": "桂林山水甲天下。秦始皇时期开凿灵渠连通湘江与漓江。桂林自古是岭南文化重镇。现为广西桂林市。",
+    "dynasty_info": "秦桂林郡，唐宋岭南重镇"
+  },
+  "南昌": {
+    "modern_name": "南昌市",
+    "province": "江西省",
+    "latitude": 28.68,
+    "longitude": 115.86,
+    "description": "南昌因汉代灌婴筑城取昌大南疆之意而得名。王勃滕王阁序让滕王阁成为千古名楼。现为江西省省会。",
+    "dynasty_info": "汉代豫章郡治所"
+  },
+  "建业": {
+    "modern_name": "南京市",
+    "province": "江苏省",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "description": "建业是三国东吴的都城名称。孙权定都于此，改秣陵为建业。东晋时改称建康。现为南京市。",
+    "dynasty_info": "三国东吴都城"
+  },
+  "秣陵": {
+    "modern_name": "南京市",
+    "province": "江苏省",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "description": "秣陵是南京在秦汉时期的名称。秦始皇南巡时设秣陵县。三国孙权改为建业。",
+    "dynasty_info": "秦汉时期南京古称"
+  },
+  "石头城": {
+    "modern_name": "南京市",
+    "province": "江苏省",
+    "latitude": 32.06,
+    "longitude": 118.77,
+    "description": "石头城是南京的古称之一，因清凉山上的石头城遗址而得名。刘禹锡有石头城诗。",
+    "dynasty_info": "六朝时期南京别称"
+  },
+  "天京": {
+    "modern_name": "南京市",
+    "province": "江苏省",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "description": "天京是太平天国定都南京后的名称。洪秀全在此建立太平天国政权。",
+    "dynasty_info": "太平天国都城"
+  },
+  "安庆": {
+    "modern_name": "安庆市",
+    "province": "安徽省",
+    "latitude": 30.53,
+    "longitude": 117.05,
+    "description": "安庆是安徽省名的来源之一（安庆+徽州）。清代安徽布政使驻地，曾是安徽省会。现为安徽省安庆市。",
+    "dynasty_info": "清代安徽省会"
+  },
+  "徽州": {
+    "modern_name": "黄山市/歙县",
+    "province": "安徽省",
+    "latitude": 29.87,
+    "longitude": 118.44,
+    "description": "徽州是安徽省名的另一来源。徽商是明清最重要的商帮之一。徽派建筑独具特色。现为黄山市和歙县一带。",
+    "dynasty_info": "宋代徽州，明清徽商故里"
+  },
+  "濮阳": {
+    "modern_name": "濮阳市",
+    "province": "河南省",
+    "latitude": 35.76,
+    "longitude": 115.03,
+    "description": "濮阳古称帝丘，是颛顼的都城。城濮之战发生在此附近。出土了距今6000年的龙形图案。现为河南省濮阳市。",
+    "dynasty_info": "上古颛顼都城，春秋卫国都城"
+  },
+  "新野": {
+    "modern_name": "新野县",
+    "province": "河南省",
+    "latitude": 32.52,
+    "longitude": 112.36,
+    "description": "新野是三国时期刘备屯兵之地，诸葛亮在此火烧博望坡。现为河南省南阳市新野县。",
+    "dynasty_info": "三国刘备屯兵之地"
   }
 }

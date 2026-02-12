@@ -90,35 +90,56 @@ def parse_input(state: AgentState) -> AgentState:
     return {**state, "ancient_name": name}
 
 
+def _lookup_fallback(ancient_name: str) -> Optional[dict]:
+    """Try to find the place name in fallback data. Returns dict or None."""
+    # Exact match
+    if ancient_name in FALLBACK_DATA:
+        return FALLBACK_DATA[ancient_name]
+    # Partial match
+    for key, val in FALLBACK_DATA.items():
+        if key in ancient_name or ancient_name in key:
+            return val
+    # Check runtime cache
+    if ancient_name in _runtime_cache:
+        return _runtime_cache[ancient_name]
+    return None
+
+
+# Runtime cache: LLM results cached in memory to avoid repeated calls
+_runtime_cache: dict[str, dict] = {}
+
+
 def llm_lookup(state: AgentState) -> AgentState:
-    """Query GLM to look up the ancient place name.
-    Falls back to built-in data if LLM fails."""
+    """Look up the ancient place name.
+    Priority: fallback data (instant) -> LLM (slow, cached after first call)."""
     if state.get("error"):
         return state
 
     ancient_name = state["ancient_name"]
 
+    # 1. Try fallback data first (instant)
+    fallback = _lookup_fallback(ancient_name)
+    if fallback:
+        return {
+            **state,
+            "raw_llm_response": json.dumps(fallback, ensure_ascii=False),
+            "used_fallback": True,
+        }
+
+    # 2. Call LLM (slow path)
     try:
         raw = _call_glm(ancient_name)
+        # Cache the parsed result for future lookups
+        try:
+            json_match = re.search(r'\{[\s\S]*\}', raw)
+            if json_match:
+                parsed = json.loads(json_match.group())
+                _runtime_cache[ancient_name] = parsed
+        except Exception:
+            pass
         return {**state, "raw_llm_response": raw, "used_fallback": False}
     except Exception as e:
-        print(f"[WARN] LLM call failed: {e}, trying fallback data...")
-        # Try exact match
-        if ancient_name in FALLBACK_DATA:
-            fallback = FALLBACK_DATA[ancient_name]
-            return {
-                **state,
-                "raw_llm_response": json.dumps(fallback, ensure_ascii=False),
-                "used_fallback": True,
-            }
-        # Try partial match
-        for key, val in FALLBACK_DATA.items():
-            if key in ancient_name or ancient_name in key:
-                return {
-                    **state,
-                    "raw_llm_response": json.dumps(val, ensure_ascii=False),
-                    "used_fallback": True,
-                }
+        print(f"[WARN] LLM call failed: {e}")
         return {**state, "error": f"大模型暂不可用，且没有「{ancient_name}」的内置数据"}
 
 
