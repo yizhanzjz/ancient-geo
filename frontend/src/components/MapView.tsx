@@ -1,32 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-
-// Fix default marker icon issue in Next.js
-const defaultIcon = L.icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const activeIcon = L.icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [30, 49],
-  iconAnchor: [15, 49],
-  popupAnchor: [1, -40],
-  shadowSize: [49, 49],
-  className: "active-marker",
-});
+import { useEffect, useRef, useState } from "react";
 
 interface PlaceResult {
   ancient_name: string;
@@ -43,76 +17,160 @@ interface MapViewProps {
   activeResult: PlaceResult | null;
 }
 
-// Component to fly to active result
-function FlyToActive({ activeResult }: { activeResult: PlaceResult | null }) {
-  const map = useMap();
-  const prevRef = useRef<string | null>(null);
+declare global {
+  interface Window {
+    AMap: any;
+    _AMapSecurityConfig: any;
+    __amap_init_callback: () => void;
+  }
+}
 
-  useEffect(() => {
-    if (activeResult) {
-      const key = `${activeResult.ancient_name}-${activeResult.latitude}`;
-      if (key !== prevRef.current) {
-        map.flyTo([activeResult.latitude, activeResult.longitude], 8, {
-          duration: 1.5,
-        });
-        prevRef.current = key;
-      }
+function loadAMapScript(): Promise<any> {
+  return new Promise((resolve, reject) => {
+    if (window.AMap) {
+      resolve(window.AMap);
+      return;
     }
-  }, [activeResult, map]);
 
-  return null;
+    // Set security config
+    window._AMapSecurityConfig = {
+      securityJsCode: process.env.NEXT_PUBLIC_AMAP_SECRET || "",
+    };
+
+    const script = document.createElement("script");
+    script.src = `https://webapi.amap.com/maps?v=2.0&key=${process.env.NEXT_PUBLIC_AMAP_KEY || ""}&callback=__amap_init_callback`;
+    script.async = true;
+
+    window.__amap_init_callback = () => {
+      resolve(window.AMap);
+    };
+
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
 }
 
 export default function MapView({ results, activeResult }: MapViewProps) {
-  // China center
-  const center: [number, number] = [35.86, 104.2];
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const markersRef = useRef<any[]>([]);
+  const infoWindowRef = useRef<any>(null);
+  const [AMap, setAMap] = useState<any>(null);
 
-  return (
-    <MapContainer
-      center={center}
-      zoom={5}
-      className="w-full h-full"
-      zoomControl={true}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <FlyToActive activeResult={activeResult} />
+  // Initialize map
+  useEffect(() => {
+    let cancelled = false;
 
-      {results.map((r, i) => {
-        const isActive =
-          activeResult?.ancient_name === r.ancient_name &&
-          activeResult?.modern_name === r.modern_name;
+    async function initMap() {
+      try {
+        const AMapModule = await loadAMapScript();
+        if (cancelled || !mapRef.current) return;
 
-        return (
-          <Marker
-            key={`${r.ancient_name}-${i}`}
-            position={[r.latitude, r.longitude]}
-            icon={isActive ? activeIcon : defaultIcon}
-          >
-            <Popup maxWidth={300}>
-              <div className="text-sm">
-                <h3 className="font-bold text-base mb-1 text-amber-900">
-                  {r.ancient_name}
-                  <span className="text-gray-400 font-normal mx-1">→</span>
-                  {r.modern_name}
-                </h3>
-                <p className="text-gray-500 text-xs mb-2">
-                  {r.province} · {r.latitude.toFixed(4)}°N,{" "}
-                  {r.longitude.toFixed(4)}°E
-                </p>
-                <p className="text-gray-700 mb-2 leading-relaxed">
-                  {r.description}
-                </p>
-                <div className="text-xs text-amber-700 bg-amber-50 px-2 py-1 rounded inline-block">
-                  📜 {r.dynasty_info}
-                </div>
-              </div>
-            </Popup>
-          </Marker>
-        );
-      })}
-    </MapContainer>
-  );
+        const map = new AMapModule.Map(mapRef.current, {
+          zoom: 5,
+          center: [104.2, 35.86],
+          viewMode: "2D",
+          mapStyle: "amap://styles/normal",
+        });
+
+        mapInstanceRef.current = map;
+        setAMap(AMapModule);
+      } catch (e) {
+        console.error("Failed to load AMap:", e);
+      }
+    }
+
+    initMap();
+
+    return () => {
+      cancelled = true;
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.destroy();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  // Update markers when results change
+  useEffect(() => {
+    if (!AMap || !mapInstanceRef.current) return;
+
+    const map = mapInstanceRef.current;
+
+    // Clear old markers
+    markersRef.current.forEach((m) => {
+      map.remove(m);
+    });
+    markersRef.current = [];
+
+    // Close existing info window
+    if (infoWindowRef.current) {
+      infoWindowRef.current.close();
+    }
+
+    // Add new markers
+    results.forEach((r) => {
+      const isActive =
+        activeResult?.ancient_name === r.ancient_name &&
+        activeResult?.modern_name === r.modern_name;
+
+      const marker = new AMap.Marker({
+        position: new AMap.LngLat(r.longitude, r.latitude),
+        title: `${r.ancient_name} → ${r.modern_name}`,
+        animation: "AMAP_ANIMATION_DROP",
+      });
+
+      const infoContent = `
+        <div style="padding: 10px; max-width: 300px; font-family: -apple-system, sans-serif;">
+          <h3 style="margin: 0 0 8px; color: #92400e; font-size: 16px; font-weight: bold;">
+            ${r.ancient_name} <span style="color: #9ca3af; font-weight: normal;">→</span> ${r.modern_name}
+          </h3>
+          <p style="margin: 0 0 6px; color: #6b7280; font-size: 12px;">
+            ${r.province} · ${r.latitude.toFixed(4)}°N, ${r.longitude.toFixed(4)}°E
+          </p>
+          <p style="margin: 0 0 8px; color: #374151; font-size: 13px; line-height: 1.6;">
+            ${r.description}
+          </p>
+          <span style="font-size: 12px; color: #92400e; background: #fffbeb; padding: 3px 10px; border-radius: 4px; display: inline-block;">
+            📜 ${r.dynasty_info}
+          </span>
+        </div>
+      `;
+
+      const infoWindow = new AMap.InfoWindow({
+        content: infoContent,
+        offset: new AMap.Pixel(0, -30),
+      });
+
+      marker.on("click", () => {
+        infoWindow.open(map, marker.getPosition());
+        infoWindowRef.current = infoWindow;
+      });
+
+      // Auto open for active result
+      if (isActive) {
+        setTimeout(() => {
+          infoWindow.open(map, marker.getPosition());
+          infoWindowRef.current = infoWindow;
+        }, 700);
+      }
+
+      map.add(marker);
+      markersRef.current.push(marker);
+    });
+  }, [AMap, results, activeResult]);
+
+  // Fly to active result
+  useEffect(() => {
+    if (!mapInstanceRef.current || !activeResult) return;
+
+    mapInstanceRef.current.setZoomAndCenter(
+      10,
+      new (window.AMap).LngLat(activeResult.longitude, activeResult.latitude),
+      false,
+      600
+    );
+  }, [activeResult]);
+
+  return <div ref={mapRef} className="w-full h-full" />;
 }
