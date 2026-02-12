@@ -235,7 +235,20 @@ export default function Home() {
         )}
 
         {/* ===== Map (desktop only) / Results list (mobile) ===== */}
-        {isMobile ? (
+        {isMobile === null ? (
+          /* Loading state — wait for client detection */
+          <main className="flex-1 relative flex items-center justify-center bg-[#fdf6e3]">
+            <div className="flex flex-col items-center gap-3">
+              <div className="relative w-12 h-12">
+                <div className="absolute inset-0 rounded-full border-2 border-amber-300 animate-pulse" />
+                <div className="absolute inset-2 rounded-full bg-amber-100 flex items-center justify-center">
+                  <span className="text-lg">🗺️</span>
+                </div>
+              </div>
+              <span className="text-amber-700 text-sm">加载中…</span>
+            </div>
+          </main>
+        ) : isMobile ? (
           <main className="flex-1 relative overflow-y-auto bg-[#fdf6e3]">
             <div className="pt-20 pb-20 px-3">
               {results.length === 0 ? (

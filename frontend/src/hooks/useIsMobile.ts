@@ -2,8 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-export function useIsMobile(): boolean {
-  const [isMobile, setIsMobile] = useState(false);
+/**
+ * Returns true on mobile, false on desktop, null before detection.
+ * Use null state to avoid rendering the wrong UI during SSR/hydration.
+ */
+export function useIsMobile(): boolean | null {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
