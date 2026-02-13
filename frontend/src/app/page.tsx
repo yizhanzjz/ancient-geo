@@ -34,6 +34,27 @@ interface PlaceResult {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
+// DEBUG: temporary debug component — remove after fixing mobile detection
+function DebugMobile({ isMobile }: { isMobile: boolean | null }) {
+  const [info, setInfo] = useState<string>("");
+  useEffect(() => {
+    setInfo(JSON.stringify({
+      isMobile,
+      screenW: screen.width,
+      innerW: window.innerWidth,
+      outerW: window.outerWidth,
+      touchPts: navigator.maxTouchPoints,
+      pointer: window.matchMedia("(pointer: coarse)").matches,
+      ua: navigator.userAgent.substring(0, 80),
+    }, null, 1));
+  }, [isMobile]);
+  return (
+    <pre style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "rgba(0,0,0,0.85)", color: "#0f0", fontSize: "10px", padding: "8px", maxHeight: "30vh", overflow: "auto" }}>
+      {info}
+    </pre>
+  );
+}
+
 const EXAMPLE_PLACES = [
   { name: "长安", emoji: "🏯" },
   { name: "临安", emoji: "🌊" },
@@ -123,6 +144,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[#fdf6e3]">
+      <DebugMobile isMobile={isMobile} />
       {/* ===== Header ===== */}
       <header className="header-pattern bg-gradient-to-r from-amber-900 via-amber-800 to-[#6b2f0a] text-white px-4 sm:px-6 py-3 sm:py-4 shadow-[0_4px_24px_rgba(69,26,3,0.3)] relative z-20">
         <div className="flex items-center gap-3">
