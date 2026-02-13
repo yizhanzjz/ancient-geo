@@ -32,7 +32,7 @@ interface PlaceResult {
   dynasty_info: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 const EXAMPLE_PLACES = [
   { name: "长安", emoji: "🏯" },
