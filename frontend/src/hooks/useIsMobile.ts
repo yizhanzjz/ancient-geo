@@ -4,35 +4,34 @@ import { useState, useEffect } from "react";
 
 /**
  * Returns true on mobile, false on desktop, null before detection.
- * Uses multiple signals: UA, screen width, touch support, pointer type.
+ *
+ * Most reliable approach: use screen.width (physical device width in CSS px).
+ * - window.innerWidth can be affected by browser zoom / split view
+ * - UA detection is fragile (Quark, UCBrowser, etc. have weird UAs)
+ * - screen.width reflects the actual device and doesn't change with zoom
+ *
+ * Fallback: touch + coarse pointer for tablets requesting desktop site.
  */
 export function useIsMobile(): boolean | null {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      const ua = navigator.userAgent;
-      // UA detection (covers most mobile browsers including WeChat)
-      const isMobileUA =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|MicroMessenger|Mobile|mobile/i.test(ua);
-      // Narrow viewport
-      const isNarrow = window.innerWidth < 768;
-      // Touch-capable device with coarse pointer (no mouse)
-      const isTouchOnly =
-        "ontouchstart" in window &&
-        window.matchMedia("(pointer: coarse)").matches &&
-        !window.matchMedia("(pointer: fine)").matches;
-      // iPad Safari requests desktop site by default — catch it via touch + platform
-      const isIPad =
-        navigator.platform === "MacIntel" &&
-        navigator.maxTouchPoints > 1;
+    const check = () => {
+      // Primary signal: physical screen width (most reliable)
+      const smallScreen = screen.width < 768;
+      // Secondary: current viewport is narrow
+      const narrowViewport = window.innerWidth < 768;
+      // Tertiary: touch-only device (no mouse) — catches tablets
+      const touchOnly =
+        navigator.maxTouchPoints > 0 &&
+        window.matchMedia("(pointer: coarse)").matches;
 
-      setIsMobile(isMobileUA || isNarrow || isTouchOnly || isIPad);
+      setIsMobile(smallScreen || narrowViewport || touchOnly);
     };
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   return isMobile;
