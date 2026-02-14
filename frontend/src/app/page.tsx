@@ -34,26 +34,7 @@ interface PlaceResult {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
-// DEBUG: temporary debug component — remove after fixing mobile detection
-function DebugMobile({ isMobile }: { isMobile: boolean | null }) {
-  const [info, setInfo] = useState<string>("");
-  useEffect(() => {
-    setInfo(JSON.stringify({
-      isMobile,
-      screenW: screen.width,
-      innerW: window.innerWidth,
-      outerW: window.outerWidth,
-      touchPts: navigator.maxTouchPoints,
-      pointer: window.matchMedia("(pointer: coarse)").matches,
-      ua: navigator.userAgent.substring(0, 80),
-    }, null, 1));
-  }, [isMobile]);
-  return (
-    <pre style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "rgba(0,0,0,0.85)", color: "#0f0", fontSize: "10px", padding: "8px", maxHeight: "30vh", overflow: "auto" }}>
-      {info}
-    </pre>
-  );
-}
+// DebugMobile removed
 
 const EXAMPLE_PLACES = [
   { name: "长安", emoji: "🏯" },
@@ -73,19 +54,11 @@ export default function Home() {
   const [results, setResults] = useState<PlaceResult[]>([]);
   const [activeResult, setActiveResult] = useState<PlaceResult | null>(null);
   const [btnAnimating, setBtnAnimating] = useState(false);
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [showMapPicker, setShowMapPicker] = useState(false);
   const [mapPickerTarget, setMapPickerTarget] = useState<PlaceResult | null>(null);
 
   const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // Auto-open drawer on mobile when results come in
-  useEffect(() => {
-    if (results.length > 0) {
-      setMobileDrawerOpen(true);
-    }
-  }, [results.length]);
 
   const handleSearch = useCallback(
     async (name?: string) => {
@@ -125,7 +98,7 @@ export default function Home() {
         setQuery("");
 
         // On mobile, auto-show map app picker
-        if (window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (isMobile) {
           setMapPickerTarget(data);
           setShowMapPicker(true);
         }
@@ -135,7 +108,7 @@ export default function Home() {
         setLoading(false);
       }
     },
-    [query]
+    [query, isMobile]
   );
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -144,7 +117,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[#fdf6e3]">
-      <DebugMobile isMobile={isMobile} />
+      {/* DebugMobile removed */}
       {/* ===== Header ===== */}
       <header className="header-pattern bg-gradient-to-r from-amber-900 via-amber-800 to-[#6b2f0a] text-white px-4 sm:px-6 py-3 sm:py-4 shadow-[0_4px_24px_rgba(69,26,3,0.3)] relative z-20">
         <div className="flex items-center gap-3">
@@ -222,39 +195,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile drawer toggle */}
-        {results.length > 0 && (
-          <button
-            className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 glass-dark text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg"
-            onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}
-          >
-            {mobileDrawerOpen ? "收起结果" : `查看结果 (${results.length})`}
-          </button>
-        )}
-
-        {/* Mobile bottom drawer */}
-        {mobileDrawerOpen && results.length > 0 && (
-          <div className="md:hidden mobile-drawer glass animate-drawer-up">
-            <div className="drawer-handle" />
-            <div className="overflow-y-auto custom-scrollbar max-h-[55vh] px-3 pb-16">
-              {results.map((r, i) => (
-                <ResultCard
-                  key={`${r.ancient_name}-${i}`}
-                  result={r}
-                  isActive={
-                    activeResult?.ancient_name === r.ancient_name &&
-                    activeResult?.modern_name === r.modern_name
-                  }
-                  index={i}
-                  onClick={() => {
-                    setActiveResult(r);
-                    setMobileDrawerOpen(false);
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Mobile drawer removed — mobile uses inline result cards in main area */}
 
         {/* ===== Map (desktop only) / Results list (mobile) ===== */}
         {isMobile === null ? (
