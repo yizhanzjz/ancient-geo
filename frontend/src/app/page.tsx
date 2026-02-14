@@ -182,21 +182,30 @@ export default function Home() {
           </main>
         ) : isMobile ? (
           <main className="flex-1 relative overflow-y-auto bg-[#fdf6e3]">
-            {/* Mobile search bar */}
+            {/* Mobile search bar — uses form so keyboard shows "搜索" submit button */}
             <div className="sticky top-0 z-30 px-3 pt-3 pb-2 bg-[#fdf6e3]/90 backdrop-blur-md">
-              <div className="glass rounded-2xl shadow-lg p-3">
+              <form
+                className="glass rounded-2xl shadow-lg p-3"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSearch();
+                  // Blur input to dismiss keyboard after search
+                  (document.activeElement as HTMLElement)?.blur();
+                }}
+              >
                 <div className="flex gap-2">
                   <input
-                    type="text"
+                    type="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={handleKeyDown}
                     placeholder="输入古代地名…"
+                    enterKeyHint="search"
+                    autoComplete="off"
                     className="flex-1 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
                     disabled={loading}
                   />
                   <button
-                    onClick={() => handleSearch()}
+                    type="submit"
                     disabled={loading || !query.trim()}
                     className={`px-4 py-2.5 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl text-sm font-medium shadow-md disabled:opacity-40 transition-all ${
                       btnAnimating ? "animate-btn-click" : ""
@@ -212,7 +221,7 @@ export default function Home() {
                     )}
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
             <div className="pb-20 px-3">
               {results.length === 0 ? (
