@@ -74,8 +74,8 @@ export default function MapAppPicker({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm animate-fade-in">
-      <div className="w-full max-w-md mx-3 mb-3 animate-drawer-up">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm animate-fade-in" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <div className="w-full max-w-md mx-3 mb-6 animate-drawer-up">
         {/* Header */}
         <div className="bg-white/95 backdrop-blur-lg rounded-t-2xl border border-amber-200/40 px-5 pt-5 pb-3">
           <div className="text-center mb-1">
