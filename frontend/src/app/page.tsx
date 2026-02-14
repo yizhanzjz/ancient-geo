@@ -162,38 +162,7 @@ export default function Home() {
           />
         </aside>
 
-        {/* Mobile floating search + drawer */}
-        <div className="md:hidden absolute top-3 left-3 right-3 z-30">
-          <div className="glass rounded-2xl shadow-lg p-3">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="输入古代地名…"
-                className="flex-1 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
-                disabled={loading}
-              />
-              <button
-                onClick={() => handleSearch()}
-                disabled={loading || !query.trim()}
-                className={`px-4 py-2.5 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl text-sm font-medium shadow-md disabled:opacity-40 transition-all ${
-                  btnAnimating ? "animate-btn-click" : ""
-                }`}
-              >
-                {loading ? (
-                  <span className="flex items-center gap-1.5">
-                    <LoadingDot />
-                    搜索
-                  </span>
-                ) : (
-                  "搜索"
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Mobile search bar — integrated into content flow so keyboard doesn't cover it */}
 
         {/* Mobile drawer removed — mobile uses inline result cards in main area */}
 
@@ -213,7 +182,39 @@ export default function Home() {
           </main>
         ) : isMobile ? (
           <main className="flex-1 relative overflow-y-auto bg-[#fdf6e3]">
-            <div className="pt-20 pb-20 px-3">
+            {/* Mobile search bar */}
+            <div className="sticky top-0 z-30 px-3 pt-3 pb-2 bg-[#fdf6e3]/90 backdrop-blur-md">
+              <div className="glass rounded-2xl shadow-lg p-3">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="输入古代地名…"
+                    className="flex-1 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
+                    disabled={loading}
+                  />
+                  <button
+                    onClick={() => handleSearch()}
+                    disabled={loading || !query.trim()}
+                    className={`px-4 py-2.5 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl text-sm font-medium shadow-md disabled:opacity-40 transition-all ${
+                      btnAnimating ? "animate-btn-click" : ""
+                    }`}
+                  >
+                    {loading ? (
+                      <span className="flex items-center gap-1.5">
+                        <LoadingDot />
+                        搜索
+                      </span>
+                    ) : (
+                      "搜索"
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="pb-20 px-3">
               {results.length === 0 ? (
                 <MobileEmptyState />
               ) : (
