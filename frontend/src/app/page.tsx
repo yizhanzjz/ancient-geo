@@ -181,11 +181,11 @@ export default function Home() {
             </div>
           </main>
         ) : isMobile ? (
-          <main className="flex-1 relative overflow-y-auto bg-[#fdf6e3]">
+          <main className="flex-1 relative overflow-y-auto overflow-x-hidden bg-[#fdf6e3] max-w-full">
             {/* Mobile search bar — uses form so keyboard shows "搜索" submit button */}
-            <div className="sticky top-0 z-30 px-3 pt-3 pb-2 bg-[#fdf6e3]/90 backdrop-blur-md">
+            <div className="sticky top-0 z-30 px-3 pt-3 pb-2 bg-[#fdf6e3]/90 backdrop-blur-md max-w-full box-border">
               <form
-                className="glass rounded-2xl shadow-lg p-3 overflow-hidden"
+                className="glass rounded-2xl shadow-lg p-3 overflow-hidden max-w-full box-border"
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleSearch();
@@ -193,15 +193,17 @@ export default function Home() {
                   (document.activeElement as HTMLElement)?.blur();
                 }}
               >
-                <div className="flex gap-2 w-full">
+                <div className="flex gap-2 w-full overflow-hidden">
                   <input
-                    type="search"
+                    type="text"
+                    inputMode="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="输入古代地名…"
                     enterKeyHint="search"
                     autoComplete="off"
-                    className="flex-1 min-w-0 w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
+                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
+                    style={{ minWidth: 0 }}
                     disabled={loading}
                   />
                   <button
