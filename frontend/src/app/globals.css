@@ -20,18 +20,35 @@ body {
   color: var(--color-ink);
 }
 
-/* Fix iOS Safari input[type="search"] default min-width & styling */
-input[type="search"] {
+/* Fix iOS Safari input default min-width & styling */
+input[type="search"],
+input[type="text"],
+input {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* iOS Safari: remove search decoration */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
-  appearance: none;
-  min-width: 0;
-  box-sizing: border-box;
+  display: none;
 }
 
 /* Prevent any horizontal overflow on mobile */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
 }
 
 /* ========== Pulse Loading Animation ========== */

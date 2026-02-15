@@ -116,7 +116,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-dvh overflow-hidden bg-[#fdf6e3]">
+    <div className="flex flex-col h-dvh overflow-hidden bg-[#fdf6e3] w-full max-w-[100vw]">
       {/* DebugMobile removed */}
       {/* ===== Header ===== */}
       <header className="header-pattern bg-gradient-to-r from-amber-900 via-amber-800 to-[#6b2f0a] text-white px-4 sm:px-6 py-3 sm:py-4 shadow-[0_4px_24px_rgba(69,26,3,0.3)] relative z-20">
@@ -195,15 +195,14 @@ export default function Home() {
               >
                 <div className="flex gap-2 w-full overflow-hidden">
                   <input
-                    type="text"
-                    inputMode="search"
+                    type="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="输入古代地名…"
                     enterKeyHint="search"
                     autoComplete="off"
-                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
-                    style={{ minWidth: 0 }}
+                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400 appearance-none"
+                    style={{ minWidth: 0, WebkitAppearance: 'none', appearance: 'none' }}
                     disabled={loading}
                   />
                   <button
