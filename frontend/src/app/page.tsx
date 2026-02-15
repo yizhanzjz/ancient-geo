@@ -201,13 +201,13 @@ export default function Home() {
                     placeholder="输入古代地名…"
                     enterKeyHint="search"
                     autoComplete="off"
-                    className="flex-1 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
+                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400"
                     disabled={loading}
                   />
                   <button
                     type="submit"
                     disabled={loading || !query.trim()}
-                    className={`px-4 py-2.5 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl text-sm font-medium shadow-md disabled:opacity-40 transition-all ${
+                    className={`flex-shrink-0 px-4 py-2.5 bg-gradient-to-b from-amber-700 to-amber-800 text-white rounded-xl text-sm font-medium shadow-md disabled:opacity-40 transition-all ${
                       btnAnimating ? "animate-btn-click" : ""
                     }`}
                   >
