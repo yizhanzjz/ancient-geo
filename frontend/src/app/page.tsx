@@ -60,6 +60,8 @@ export default function Home() {
   const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // iOS Safari auto-zoom fix: input font-size must be >= 16px
+
   const handleSearch = useCallback(
     async (name?: string) => {
       const searchName = name || query.trim();
@@ -201,8 +203,8 @@ export default function Home() {
                     placeholder="输入古代地名…"
                     enterKeyHint="search"
                     autoComplete="off"
-                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm text-amber-950 placeholder:text-amber-400 appearance-none"
-                    style={{ minWidth: 0, WebkitAppearance: 'none', appearance: 'none' }}
+                    className="flex-1 min-w-0 px-3 py-2.5 bg-white/70 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-base text-amber-950 placeholder:text-amber-400 appearance-none"
+                    style={{ minWidth: 0, fontSize: '16px', WebkitAppearance: 'none', appearance: 'none' }}
                     disabled={loading}
                   />
                   <button
